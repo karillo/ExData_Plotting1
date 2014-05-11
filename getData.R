@@ -9,14 +9,15 @@ if(!file.exists("household_power_consumption.txt")){
 
 
 ## If the dataframe doesn't exist, recreate it.
-
-
 library(sqldf)
 conn <- sqldf() # Open connection
 power <- read.csv.sql (file = "household_power_consumption.txt", 
                       sql = "select * from file where Date in ('1/2/2007','2/2/2007')",
                       sep=";", filter="egrep -v '\\?'")
+# Note: we're using "egrep -v '\?' to filter out rows with missing values.
+#  This won't be platform portable to non-POSIX platforms like windows.
 conn <- sqldf() # Close connection
+
 # Filtering out rows with NA doesn't happen to be necessary when just looking at
 # these two dates. Filter them out anyway as roughly 1% of provided rows have 
 # these NA values. As a result, we could assert that
