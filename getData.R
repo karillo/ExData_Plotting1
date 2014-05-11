@@ -25,7 +25,5 @@ conn <- sqldf() # Close connection
 power$DateTime <- strptime(paste(power$Date,power$Time), format="%d/%m/%Y %H:%M:%S",tz="GMT")
 power$Date <- as.Date(power$Date,format="%d/%m/%Y")
 
-# Useful:
-# format (power2$DateTime, "%a")
-
-
+# We don't actually use power$Date on the graphs, but will switch to 
+# Date datatype anyway.
